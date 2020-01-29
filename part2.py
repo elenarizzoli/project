@@ -41,27 +41,10 @@ class AssociatedGenes(Project):
 	
 		
 #recording the number of chromosomes in the dataset
-#class Chromosomes(Project):
-
-	#def record(self):
-		#chm= set() 		#contains unique objects
-		#unique=[]
-		#for item in df:
-			#if item not in chm:
-			#	unique.append(item)
-			#	chm.add(item)
-		#return chm
-		
-		
-		
-		
-		#df_c=df.loc[:,'chromosome']
-		#for item in df_c:
-		#	if item==df_c[:,:]:
-		#		pass
-		#	else:
-		#		return 
-		#return df_c
+class Chromosomes(Project):
+	
+	def record(self):
+		return len(set(df.loc[:,'chromosome']))
 
 #recording the number of genes for each chromosome. The list should be sorted in ascending order
 class NumberOfGenes(Project):
