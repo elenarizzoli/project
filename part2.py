@@ -66,10 +66,11 @@ class AssociatedGenes(Project):
 		#return df_c
 
 #recording the number of genes for each chromosome. The list should be sorted in ascending order
-#class NumberOfGenes(Project):
+class NumberOfGenes(Project):
 
-	#def record(self):
-		#return df.loc[:,'gene_name']
+	def record(self):
+		number_genes=df.groupby('chromosome')['chromosome'].count()			#total number of genes for each chromosome
+		return number_genes.sort_values(ascending=True)
 		
 
 #recording, for each chromosome, the percentage of genes located on the + strand;
