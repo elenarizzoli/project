@@ -26,13 +26,11 @@ class Semantics(Project):
 		return df.columns.values		#to get the labels of the rows --> df.index.values
 
 #recording the number of genes for each biotype. The list should be sorted in ascending order;
-#class Genes(Project):
+class Genes(Project):
 	
-	#def record(self):
-		#return df.loc[:,'gene_biotype']
-		#return df.groupby('gene_biotype').count()			#same as df.groupby(by='gene_biotype')
-		#return df.loc[:,'gene_biotype'].sort_values(['count'], ascending=False)						
-		#df.sort_values(by='gene_biotype', ascending=False)
+	def record(self):
+		number_genes=df.groupby('gene_biotype')['gene_biotype'].count()		#total number of genes for each biotype
+		return number_genes.sort_values(ascending=True)		
 	
 
 #recording, given a certain biotype as input, the list of associated genes
