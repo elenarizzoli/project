@@ -14,7 +14,7 @@ app = Flask(__name__)
 
 @app.route('/')  
 def index(): 
-	return render_template('page1.html')
+	return render_template('part3.html')
 	
 #@app.route('/slides')  
 #def slides():
