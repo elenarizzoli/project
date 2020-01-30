@@ -26,7 +26,7 @@ def result1():
 @app.route('/result2')  
 def result2():
 	a=Semantics()
-	result1=a.record()
+	result2=a.record()
 	return render_template('result2.html', value={'sm': result2})
 
 @app.route('/result3')  
