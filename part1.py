@@ -19,51 +19,44 @@ def index():
 	
 @app.route('/result1')  
 def result1():
-	a=Number()
-	result1=a.record()
+	result1=Number().record()
 	return render_template('result1.html', value={'rc': result1})
 
 @app.route('/result2')  
 def result2():
-	a=Semantics()
-	result2=a.record()
+	result2=Semantics().record()
 	return render_template('result2.html', value={'sm': result2})
 
 @app.route('/result3')  
 def result3():
-	a=Genes()
-	result3=a.record()
-	return render_template('result3.html', value={'gn': result3})
+	result3=Genes().record()
+	return render_template('result3.html', gn=result3.to_html())
 
-@app.route('/result14')  
+@app.route('/result4')  
 def result4():
-	a=AssociatedGenes()
-	result4=a.record()
-	return render_template('result4.html', value={'ag': result4})
+	result4=AssociatedGenes().record()
+	return render_template('result4.html', ag=result4.to_html())
 		
 @app.route('/result5')  
 def result5():
-	a=Chromosomes()
-	result5=a.record()
+	result5=Chromosomes().record()
 	return render_template('result5.html', value={'ch': result5})
 
 @app.route('/result6')  
 def result6():
-	a=NumberOfGenes()
-	result6=a.record()
-	return render_template('result6.html', value={'ng': result6})
+	result6=NumberOfGenes().record()
+	return render_template('result6.html', ng=result6.to_html())
 
 @app.route('/result7')  
 def result7():
-	a=PlusStrand()
-	result7=a.record()
+	result7=PlusStrand().record()
 	return render_template('result7.html', value={'ps': result7})
 
 @app.route('/result8')  
 def result8():
-	a=MinusStrand()
-	result8=a.record()
+	result8=MinusStrand().record()
 	return render_template('result8.html', value={'ms': result8})	
+
 
 
 #a=Number()
