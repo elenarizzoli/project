@@ -77,6 +77,8 @@ class PlusStrand(Project):
 		s=p.set_index('chromosome')                                            #change the index into the chromosome column
 		
 		t['minus_genes']= s['minus_genes']                                     #create a new column of the first dataframe where pandas associates to each chromosome(index) the value of the second dataframe's column. where pandas doesn't find a corresponding number it writes Nan
+		                                                      #reset index to numbers
+		t['percentage']=t['minus_genes']*100//t['tot_genes']
 		
 		return t
 		
