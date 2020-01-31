@@ -30,14 +30,14 @@ class Genes(Project):
 	
 	def record(self):
 		number_genes=df.groupby('gene_biotype')['gene_biotype'].count()		#total number of genes for each biotype
-		return number_genes.sort_values(ascending=True)		
+		return number_genes.sort_values(ascending=True).to_frame().rename(columns={"gene_biotype": "number of genes"})		
 	
 
 #recording, given a certain biotype as input, the list of associated genes
 class AssociatedGenes(Project):
 
 	def record(self):
-		return df.groupby('gene_biotype')['gene_name'].apply(lambda group_series:group_series.tolist())		#.reset_index()???
+		return df.groupby('gene_biotype')['gene_name'].apply(lambda group_series:group_series.tolist()).to_frame()		#.reset_index()???
 	
 		
 #recording the number of chromosomes in the dataset
@@ -51,7 +51,7 @@ class NumberOfGenes(Project):
 
 	def record(self):
 		number_genes=df.groupby('chromosome')['chromosome'].count()			#total number of genes for each chromosome
-		return number_genes.sort_values(ascending=True)
+		return number_genes.sort_values(ascending=True).to_frame().rename(columns={"gene_biotype": "number of genes"})
 		
 
 #recording, for each chromosome, the percentage of genes located on the + strand;
