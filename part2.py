@@ -63,7 +63,24 @@ class NumberOfGenes(Project):
 #class MinusStrand(Project):
 #	def record(self):
 #		return
-
+class PlusStrand(Project):
+	def record(self):
+		df_tot=df.groupby('chromosome')['chromosome'].count()                  #create a dataframe with chromosomes and number of total genes on the chromosome
+		r=pd.DataFrame(df_tot.items(), columns=['chromosome', 'tot_genes'])    #rename the columns
+		r.sort_values(by=['chromosome'])                                       #put the chromosomes in order
+		t=r.set_index('chromosome')                                            #change the index into the chromosome column
+		
+		df_minus = df[df['strand'] == '-']                                     #select all the rows with minus strand
+		df_minuss=df_minus.groupby('chromosome')['chromosome'].count()         #count how many genes per chromosome
+		p = pd.DataFrame(df_minuss.items(), columns=['chromosome', 'minus_genes']) #change the columns' names
+		p.sort_values(by=['chromosome'])                                       #put the chromosome in order
+		s=p.set_index('chromosome')                                            #change the index into the chromosome column
+		
+		t['minus_genes']= s['minus_genes']                                     #create a new column of the first dataframe where pandas associates to each chromosome(index) the value of the second dataframe's column. where pandas doesn't find a corresponding number it writes Nan
+		
+		return t
+		
+print(PlusStrand().record())
 
 #part1 has to manage these prints
 #a=Number()					#instance:specific obj created from the class Number()
