@@ -58,12 +58,34 @@ class NumberOfGenes(Project):
 #class PlusStrand(Project):
 #	def record(self):
 #		return
+class PlusStrand(Project):
+	def record(self):
+		df_tot=df.groupby('chromosome')['chromosome'].count()                  #create a dataframe with chromosomes and number of total genes on the chromosome
+		r=pd.DataFrame(df_tot.items(), columns=['chromosome', 'tot_genes'])    #rename the columns
+		r.sort_values(by=['chromosome'])                                       #put the chromosomes in order
+		t=r.set_index('chromosome')                                            #change the index into the chromosome column
+		
+		df_plus = df[df['strand'] == '+']                                     #select all the rows with minus strand
+		df_pluss=df_plus.groupby('chromosome')['chromosome'].count()         #count how many genes per chromosome
+		p = pd.DataFrame(df_pluss.items(), columns=['chromosome', 'plus_genes']) #change the columns' names
+		p.sort_values(by=['chromosome'])                                       #put the chromosome in order
+		s=p.set_index('chromosome')                                            #change the index into the chromosome column
+		
+		t['plus_genes']= s['plus_genes']                                     #create a new column of the first dataframe where pandas associates to each chromosome(index) the value of the second dataframe's column. where pandas doesn't find a corresponding number it writes Nan
+		                                                      
+		t['percentage']=t['plus_genes']*100//t['tot_genes']
+		
+		return t
+		
+print(PlusStrand().record())
+
+
 
 #recording, for each chromosome, the percentage of genes located on the - strand
 #class MinusStrand(Project):
 #	def record(self):
 #		return
-class PlusStrand(Project):
+class MinusStrand(Project):
 	def record(self):
 		df_tot=df.groupby('chromosome')['chromosome'].count()                  #create a dataframe with chromosomes and number of total genes on the chromosome
 		r=pd.DataFrame(df_tot.items(), columns=['chromosome', 'tot_genes'])    #rename the columns
@@ -82,7 +104,7 @@ class PlusStrand(Project):
 		
 		return t
 		
-print(PlusStrand().record())
+print(MinusStrand().record())
 
 #part1 has to manage these prints
 #a=Number()					#instance:specific obj created from the class Number()
